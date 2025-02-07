@@ -15,14 +15,16 @@
 // Refer to LICENSE for more information.
 using System;
 using System.Diagnostics;
-using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using Confluent.Kafka;
+using System.Collections.Generic;
+using Confluent.Kafka.SyncOverAsync;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
+using System.IO;
 using Confluent.SchemaRegistry;
 using Confluent.SchemaRegistry.Serdes;
-using Microsoft.Extensions.Configuration;
-using Confluent.Kafka.SyncOverAsync;
 
 namespace Confluent.Kafka.Examples.AvroSpecific
 {

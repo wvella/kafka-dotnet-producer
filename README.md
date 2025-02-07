@@ -1,4 +1,4 @@
-# .NET load testing producer
+# .NET load testing producer using the Producer method
 
 This project contains a .NET application that produces records to a topic on Confluent Cloud and prints the produced records to the console.
 
