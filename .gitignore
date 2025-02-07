@@ -1,0 +1,17 @@
+# secrets file
+appsettings.json
+
+# build folders
+bin/
+obj/
+
+# user-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# user-specific folders
+.vs/
+.vscode/
