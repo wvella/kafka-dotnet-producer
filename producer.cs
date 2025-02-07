@@ -73,7 +73,7 @@ namespace Confluent.Kafka.Examples.AvroSpecific
 
             Action<DeliveryReport<string, User>> handler = r =>
                 Console.WriteLine(!r.Error.IsError
-                    ? $"Delivered {r.Value.name} to partition: {r.Partition} offset: {r.Offset}"
+                    ? $"Delivered {r.Value.name} to partition: {r.Partition} offset: {r.Offset} with a status of: {r.Status}"
                     : $"Delivery Error: {r.Error.Reason}");
 
             using (var schemaRegistry = new CachedSchemaRegistryClient(schemaRegistryConfig))
