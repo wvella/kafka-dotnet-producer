@@ -71,6 +71,11 @@ namespace Confluent.Kafka.Examples.AvroSpecific
                 BufferBytes = 100
             };
 
+            Action<DeliveryReport<string, User>> handler = r =>
+                Console.WriteLine(!r.Error.IsError
+                    ? $"Delivered {r.Value.name} to partition: {r.Partition} offset: {r.Offset}"
+                    : $"Delivery Error: {r.Error.Reason}");
+
             using (var schemaRegistry = new CachedSchemaRegistryClient(schemaRegistryConfig))
 
             using (var p = new ProducerBuilder<string, User>(producerConfig)
@@ -82,13 +87,14 @@ namespace Confluent.Kafka.Examples.AvroSpecific
                 int i = 1;
                 int numOfMessages = int.Parse(configuration["Producer:numOfMessages"]);
                 int sizeOfPayload = int.Parse(configuration["Producer:sizeOfPayload"]);
+
                 for (int j = 0; j < numOfMessages; j++)
                 {
                     User user = new User { name = "user:" + j, favorite_color = new string('g', sizeOfPayload), favorite_number = ++i, hourly_rate = new Avro.AvroDecimal(67.99) };
                     try
                     {
                         // Example 1 - Produce - Still Async with a callback
-                        p.Produce(topicName, new Message<string, User> { Key = "user-" + j, Value = user });
+                        p.Produce(topicName, new Message<string, User> { Key = "user-" + j, Value = user }, handler);
                     }
                     catch (ProduceException<string, User> e) when (e.Error.Code == ErrorCode.Local_QueueFull)
                     {
