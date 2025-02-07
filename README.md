@@ -43,7 +43,7 @@ Create a appsettings.json file in the root as below:
       "BootstrapServers": "<<bootstrap name>>:<<bootstrap port>>",
       "SaslUsername": "<<API Key>>",
       "SaslPassword": "<<API Secret>>",
-      "LingerMs": 500,
+      "LingerMs": 2000,
       "BatchNumMessages": 4000,
       "MessageMaxBytes": 6291456,
       "BatchSize": 6291456,
