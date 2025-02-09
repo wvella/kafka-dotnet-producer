@@ -1,4 +1,4 @@
-# .NET load testing producer using the Producer method
+# .NET load testing producer using the Producer and ProducerAsync method
 
 This project contains 2 .NET applications that produce records to a topic on Confluent Cloud and prints batch information to the console.
 
