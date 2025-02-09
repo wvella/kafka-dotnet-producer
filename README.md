@@ -1,16 +1,22 @@
 # .NET load testing producer using the Producer method
 
-This project contains a .NET application that produces records to a topic on Confluent Cloud and prints the produced records to the console.
+This project contains 2 .NET applications that produce records to a topic on Confluent Cloud and prints batch information to the console.
 
-This has been built to play around with the batching properties. In my example, I have deployed a Standard Cluster in Confluent Cloud, with 1 Topic, 6 partitions, with a `max.message.bytes` of `7340032`.
+This has been built to play around with the batching properties. In my example, I have deployed the following:
+```
+- Kafka Cluser: Standard Kafka Cluster in AWS
+- Topic: raw.inventory
+- Partitions: 6
+- max.message.bytes: 7340032
+```
 
-The producer is configured with the following properties:
+The batching parameters are configurable in the `appsettings.json` configuration file, however I landed on the following properties:
 
 ```
-    "LingerMs": 500,
-    "BatchNumMessages": 4000,
-    "MessageMaxBytes": 6291456,
-    "BatchSize": 6291456
+"LingerMs": 500,
+"BatchNumMessages": 4000,
+"MessageMaxBytes": 6291456,
+"BatchSize": 6291456
 ```
 
 ## Getting Started
@@ -21,21 +27,23 @@ The producer is configured with the following properties:
 
 ### Usage
 
-Build the producer by running:
+Build either the `Produce` or `ProduceAsync` producer by running:
 
 ```shell
 $ dotnet build producer.csproj
+$ dotnet build producerAsync.csproj
 ```
 
-Run the producer by running this from the src/ directory:
+Run the `Produce` or `ProduceAsync` by running:
 
 ```shell
-$ dotnet run
+$ dotnet run --project producer.csproj
+$ dotnet run --project producerAsync.csproj
 ```
 
 ### App Configuration
 
-Create a appsettings.json file in the root as below:
+Create a `appsettings.json` file in the root folder as below:
 
 ```json
 {
