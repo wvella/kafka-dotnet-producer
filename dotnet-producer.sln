@@ -1,8 +1,10 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "producer", "producer.csproj", "{775DA114-D451-20D5-EDEB-CB1232F5937B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "producerAsync", "producerAsync.csproj", "{E4C338C0-B582-464D-BF7E-E442D5D02C02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,6 +16,10 @@ Global
 		{775DA114-D451-20D5-EDEB-CB1232F5937B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{775DA114-D451-20D5-EDEB-CB1232F5937B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{775DA114-D451-20D5-EDEB-CB1232F5937B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4C338C0-B582-464D-BF7E-E442D5D02C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4C338C0-B582-464D-BF7E-E442D5D02C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4C338C0-B582-464D-BF7E-E442D5D02C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4C338C0-B582-464D-BF7E-E442D5D02C02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -21,6 +21,9 @@ The batching parameters are configurable in the `appsettings.json` configuration
 
 ## Getting Started
 
+FYI: To generate a class from an AVRO schema, run:
+`avrogen -s avro/User.avsc . --namespace "confluent.io.examples.serialization.avro:wvella.avro"`
+
 ### Prerequisites
 
 .NET Core (>= 8.0) installed.
@@ -29,18 +32,16 @@ The batching parameters are configurable in the `appsettings.json` configuration
 
 Build either the `Produce` or `ProduceAsync` producer by running:
 
-```shell
-$ dotnet build producer.csproj
-$ dotnet build producerAsync.csproj
-```
+`cd dotnet-producerAsync OR dotnet-producer`
 
+```shell
+$ dotnet build
+```
 Run the `Produce` or `ProduceAsync` by running:
 
 ```shell
-$ dotnet run --project producer.csproj
-$ dotnet run --project producerAsync.csproj
+$ dotnet run
 ```
-
 ### App Configuration
 
 Create a `appsettings.json` file in the root folder as below:

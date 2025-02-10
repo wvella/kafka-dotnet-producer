@@ -20,6 +20,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Confluent.Kafka;
 using Confluent.Kafka.SyncOverAsync;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
@@ -27,12 +28,11 @@ using System.IO;
 using Confluent.SchemaRegistry;
 using Confluent.SchemaRegistry.Serdes;
 
-
-namespace Confluent.Kafka.Examples.AvroSpecific
+namespace wvella.avro
 {
-    class producerAsync
+    class ProducerAsync
     {
-        public static async Task produce(string[] args)
+        public static async Task Main(string[] args)
         {
             var stopwatchMain = Stopwatch.StartNew();
             const string topicName = "raw.inventory";
@@ -75,7 +75,6 @@ namespace Confluent.Kafka.Examples.AvroSpecific
 
             using (var schemaRegistry = new CachedSchemaRegistryClient(schemaRegistryConfig))
 
-
             using (var producer =
                 new ProducerBuilder<string, User>(producerConfig)
                     .SetValueSerializer(new AvroSerializer<User>(schemaRegistry, avroSerializerConfig))
@@ -89,34 +88,38 @@ namespace Confluent.Kafka.Examples.AvroSpecific
                 List<Task<DeliveryResult<string, User>>> sendTasks = new List<Task<DeliveryResult<string, User>>>();
                 for (int j = 0; j < numOfMessages; j++)
                 {
+                    User user = new User
+                    {
+                        name = "user:" + j,
+                        favorite_color = new string('g', sizeOfPayload),
+                        favorite_number = ++i,
+                        hourly_rate = new Avro.AvroDecimal(67.99)
+                    };
 
-                    User user = new User { name = "user:" + j, favorite_color = new string('g', 2048), favorite_number = ++i, hourly_rate = new Avro.AvroDecimal(67.99) };
                     try
                     {
-                        // Example 1 - ProduceAsync with an 'await' - Effectivley making it Sync.
-                        //await produceMessagesAsync(producer, topicName, user, j);
+                        // Example 1 - ProduceAsync with an 'await' - Effectively making it Sync.
+                        await produceMessagesAsync(producer, topicName, user, j);
 
-                        // Example 2 - ProduceAsync with an 'TaskList' - Effectivley making it Async and allows batching.
-                        produceMessagesAsyncBatch(producer, topicName, user, j, sendTasks);
+                        // Example 2 - ProduceAsync with an 'TaskList' - Effectively making it Async and allows batching.
+                        //produceMessagesAsyncBatch(producer, topicName, user, j, sendTasks);
                     }
-
                     catch (ProduceException<Null, string> e)
                     {
                         Console.WriteLine($"Delivery failed: {e.Error.Reason}");
                     }
                 }
-                // Example 2 - ProduceAsync with an 'TaskList' - Effectivley making it Async and allows batching.
-                var results = await Task.WhenAll(sendTasks);
+                // Example 2 - ProduceAsync with an 'TaskList' - Effectively making it Async and allows batching.
+                /* var results = await Task.WhenAll(sendTasks);
                 foreach (var result in results)
                 {
                     Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------------------");
                     Console.WriteLine($"Delivered '{result.Value.name}' to partition: '{result.Partition}' offset: '{result.Offset}'");
                     Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------------------");
-                }
+                } */
             }
-        stopwatchMain.Stop();
-        Console.WriteLine($"Total execution time: {stopwatchMain.Elapsed}");
-
+            stopwatchMain.Stop();
+            Console.WriteLine($"Total execution time: {stopwatchMain.Elapsed}");
         }
 
         private static async Task produceMessagesAsync(IProducer<string, User> producer, string topicName, User user, int j)
@@ -133,7 +136,5 @@ namespace Confluent.Kafka.Examples.AvroSpecific
         {
             sendTasks.Add(producer.ProduceAsync(topicName, new Message<string, User> { Key = "user" + j, Value = user }));
         }
-
     }
-
 }

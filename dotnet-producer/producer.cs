@@ -19,6 +19,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Confluent.Kafka;
 using Confluent.Kafka.SyncOverAsync;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
@@ -26,7 +27,7 @@ using System.IO;
 using Confluent.SchemaRegistry;
 using Confluent.SchemaRegistry.Serdes;
 
-namespace Confluent.Kafka.Examples.AvroSpecific
+namespace wvella.avro
 {
     class Producer
     {
@@ -90,7 +91,14 @@ namespace Confluent.Kafka.Examples.AvroSpecific
 
                 for (int j = 0; j < numOfMessages; j++)
                 {
-                    User user = new User { name = "user:" + j, favorite_color = new string('g', sizeOfPayload), favorite_number = ++i, hourly_rate = new Avro.AvroDecimal(67.99) };
+                    User user = new User
+                    {
+                        name = "user:" + j,
+                        favorite_color = new string('g', sizeOfPayload),
+                        favorite_number = ++i,
+                        hourly_rate = new Avro.AvroDecimal(67.99)
+                    };
+
                     try
                     {
                         // Example 1 - Produce - Still Async with a callback
