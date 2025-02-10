@@ -22,7 +22,8 @@ The batching parameters are configurable in the `appsettings.json` configuration
 ## Getting Started
 
 FYI: To generate a class from an AVRO schema, run:
-`avrogen -s avro/User.avsc . --namespace "confluent.io.examples.serialization.avro:wvella.avro"`
+
+`avrogen -s User.avsc . --namespace "confluent.io.examples.serialization.avro:avro"`
 
 ### Prerequisites
 

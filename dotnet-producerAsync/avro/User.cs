@@ -5,7 +5,7 @@
 //    is regenerated
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace wvella.avro
+namespace avro
 {
 	using System;
 	using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace wvella.avro
 	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("avrogen", "1.12.0+8c27801dc8d42ccc00997f25c0b8f45f8d4a233e")]
 	public partial class User : global::Avro.Specific.ISpecificRecord
 	{
-		public static global::Avro.Schema _SCHEMA = global::Avro.Schema.Parse(@"{""type"":""record"",""name"":""User"",""namespace"":""wvella.avro"",""fields"":[{""name"":""name"",""type"":""string""},{""name"":""favorite_number"",""type"":""long""},{""name"":""favorite_color"",""type"":""string""},{""name"":""hourly_rate"",""default"":null,""type"":[""null"",{""type"":""bytes"",""logicalType"":""decimal"",""precision"":4,""scale"":2}]}]}");
+		public static global::Avro.Schema _SCHEMA = global::Avro.Schema.Parse(@"{""type"":""record"",""name"":""User"",""namespace"":""avro"",""fields"":[{""name"":""name"",""type"":""string""},{""name"":""favorite_number"",""type"":""long""},{""name"":""favorite_color"",""type"":""string""},{""name"":""hourly_rate"",""default"":null,""type"":[""null"",{""type"":""bytes"",""logicalType"":""decimal"",""precision"":4,""scale"":2}]}]}");
 		private string _name;
 		private long _favorite_number;
 		private string _favorite_color;

@@ -27,7 +27,7 @@ using System.IO;
 using Confluent.SchemaRegistry;
 using Confluent.SchemaRegistry.Serdes;
 
-namespace wvella.avro
+namespace avro
 {
     class Producer
     {
